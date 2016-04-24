@@ -43,7 +43,7 @@ Difficulty : Easy
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
+void traverse(struct node *, int *);
 struct node{
 	int data;
 	struct node *left;
@@ -51,6 +51,30 @@ struct node{
 };
 
 
-int get_missing_value(struct node *root,int n){
-    return -1;
+int get_missing_value(struct node *root,int n)
+{
+    
+	int sum = 0,total;
+	struct node *temp;
+	temp = root;
+	total = (n*(n + 1)) / 2;
+	if (temp == NULL)
+		return -1;
+	traverse(temp, &sum);
+	return total - sum;
+}
+
+void traverse(struct node *temp, int *sum)
+{
+	if (temp != NULL)
+	{
+		if ((temp->data) >= 0)
+	{
+
+			*sum = *sum + (temp->data);
+		
+	}
+	traverse(temp->left,sum);
+	traverse(temp->right, sum);
+	}
 }
